@@ -13,12 +13,13 @@
 // Output: [0]
 
 const moveZeroes = function(nums) {
-    for (let num of nums) {
-        if (num === 0) {
-            nums.splice(nums.indexOf(num), 1)
-            nums.push(0)
-        }
+  for (let num of nums) {
+    if (num === 0) {
+      nums.splice(nums.indexOf(num), 1)
+      nums.push(0)
     }
+  }
+  return nums
 };
 
 console.log(moveZeroes([0,1,0,3,12])) // [1,3,12,0,0]
