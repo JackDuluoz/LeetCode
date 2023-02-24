@@ -12,8 +12,19 @@
 // Input: s = ["H","a","n","n","a","h"]
 // Output: ["h","a","n","n","a","H"]
 
+// const reverseString = function(s) {
+//   s.reverse()
+//   return s
+// };
+
 const reverseString = function(s) {
-  s.reverse()
+  let left = 0
+  let right = s.length - 1
+  while (left < right) {
+    let temp = s[left]
+    s[left++] = s[right]
+    s[right--] = temp
+  }
   return s
 };
 
