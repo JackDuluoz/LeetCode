@@ -53,10 +53,11 @@
 -- Node 2 is an inner node because it has parent node 1 and child node 4 and 5.
 -- Nodes 3, 4, and 5 are leaf nodes because they have parent nodes and they do not have child nodes.
 
-SELECT id,'Root' AS type FROM tree t WHERE p_id IS null
-UNION
-SELECT id,'Inner' AS type FROM tree t WHERE EXISTS
-(SELECT 1 FROM tree WHERE p_id = t.id ) AND p_id IS NOT null
-UNION
-SELECT id,'Leaf' AS type FROM tree t WHERE NOT EXISTS
-(SELECT 1 FROM tree WHERE p_id = t.id ) AND p_id IS NOT null;
+SELECT 
+    id,
+    CASE WHEN p_id IS NULL THEN 'Root'
+         WHEN id IN (SELECT p_id FROM tree) THEN 'Inner'
+         ELSE 'Leaf'
+    END
+    AS type
+FROM tree;
