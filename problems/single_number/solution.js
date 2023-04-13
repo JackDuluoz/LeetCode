@@ -3,17 +3,29 @@
  * @return {number}
  */
 const singleNumber = function(nums) {
+  // nums.sort()
+  // let i = 0
+  // while (i < nums.length) {
+  //   if (nums[i] === nums[i + 1]) {
+  //     i += 2
+  //   } else {
+  //     return nums[i]
+  //   }
+  // }
 
-  if (nums.length === 1) {
-    return nums[0]
-  }
-  nums.sort()
-  let i = 0
-  while (i < nums.length) {
-    if (nums[i] === nums[i + 1]) {
-      i += 2
+  let count = {}
+
+  for (let i = 0; i < nums.length; i ++) {
+    if (!count[nums[i]]) {
+      count[nums[i]] = 1
     } else {
-      return nums[i]
+      count[nums[i]]++
+    }
+  }
+
+  for (let key in count) {
+    if (count[key] === 1) {
+      return key
     }
   }
 
